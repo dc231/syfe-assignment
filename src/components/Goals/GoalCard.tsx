@@ -37,9 +37,9 @@ export const GoalCard: React.FC<GoalCardProps> = ({
     ? goal.targetAmount * exchangeRate 
     : goal.targetAmount / exchangeRate;
 
-  const convertedSaved = isUSD
-    ? totalSaved * exchangeRate
-    : totalSaved / exchangeRate;
+//   const convertedSaved = isUSD
+//     ? totalSaved * exchangeRate
+//     : totalSaved / exchangeRate;
 
   return (
     <div className={styles.card}>
