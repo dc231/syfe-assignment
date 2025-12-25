@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Currency } from '../../types';
+import type { Currency } from '../../types';
 import styles from './AddGoalForm.module.css';
 
 interface AddGoalFormProps {
