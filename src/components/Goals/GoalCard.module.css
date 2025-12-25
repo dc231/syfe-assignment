@@ -1,0 +1,101 @@
+.card {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-main);
+}
+
+.currencyTag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  background-color: var(--bg-body);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.amountSection {
+  margin-bottom: 1.5rem;
+}
+
+.mainAmount {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  display: block;
+}
+
+.subAmount {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.progressSection {
+  margin-bottom: 1.5rem;
+}
+
+.progressLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.progressBarContainer {
+  height: 8px;
+  background-color: var(--bg-body);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressBarFill {
+  height: 100%;
+  background-color: var(--success);
+  border-radius: 4px;
+  transition: width 0.5s ease-out;
+}
+
+.addBtn {
+  margin-top: auto; /* Pushes button to bottom */
+  width: 100%;
+  padding: 0.75rem;
+  background-color: transparent;
+  border: 1px dashed var(--primary);
+  color: var(--primary);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.addBtn:hover {
+  background-color: rgba(79, 70, 229, 0.05);
+  border-style: solid;
+}
