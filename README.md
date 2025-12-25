@@ -1,73 +1,62 @@
-# React + TypeScript + Vite
+# Syfe Savings Planner 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight, client-side application to track financial goals and visualize progress. Built as a Frontend Intern assignment for Syfe.
 
-Currently, two official plugins are available:
+##  Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* **Goal Management**: Create multiple savings goals with custom targets.
+* **Multi-Currency Support**: seamless handling of **USD** and **INR** goals.
+* **Smart Dashboard**: Aggregates all goals into a single "Financial Overview" converted to the base currency (INR).
+* **Live Exchange Rates**: Real-time fetching of USD-to-INR rates via API.
+* **Progress Tracking**: Visual progress bars and percentage calculation for every contribution.
+* **Responsive Design**: optimized for both desktop and mobile screens.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* **Framework**: React 18 (via Vite)
+* **Language**: TypeScript (Strict Mode)
+* **Styling**: CSS Modules (Scoped styling, no external UI libraries used)
+* **State Management**: React Hooks (useState, useMemo, custom hooks)
+* **Icons/Utils**: `uuid` for unique ID generation.
 
-## Expanding the ESLint configuration
+## Setup & Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1.  **Clone the repository**
+    ```bash
+    git clone <your-repo-url>
+    cd syfe-savings-planner
+    ```
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+2.  **Install dependencies**
+    ```bash
+    npm install
+    ```
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+3.  **Run the development server**
+    ```bash
+    npm run dev
+    ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+4.  **Build for production**
+    ```bash
+    npm run build
+    ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Design Decisions & Trade-offs
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 1. CSS Modules over Tailwind/UI Libraries
+[cite_start]To adhere to the requirement of not using component libraries (MUI/ChakraUI)[cite: 34], I chose **CSS Modules**. This offers:
+* **Modularity**: Styles are locally scoped to components, preventing global namespace pollution.
+* **Readability**: Clear separation between logic (`.tsx`) and presentation (`.css`).
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 2. Custom `useExchangeRate` Hook
+I extracted the API logic into a custom hook (`src/hooks/useExchangeRate.ts`). This separates the **data fetching layer** from the **UI layer**, making the components cleaner and easier to test. It handles:
+* Fetching from `open.er-api.com`.
+* Loading and Error states.
+* Caching (API allows 1.5k requests, but we only fetch on mount or manual refresh).
+
+### 3. Currency Normalization
+The Dashboard aggregates totals. Since goals can be mixed (some USD, some INR), the app normalizes everything to **INR** for the summary view using the live exchange rate. This ensures the "Total Saved" metric is always accurate regardless of currency fluctuations.
+
+---
+*Built with ❤️ by Dheeraj Chaudhary*
